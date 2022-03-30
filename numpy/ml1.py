@@ -42,10 +42,29 @@ np.random.shuffle(index)
 # Create train set
 train_input = input_arr[index[:35]]
 train_target = target_arr[index[:35]]
-
+# 35까지는 training set 36부터는 test set
 # Create test set
 test_input = input_arr[index[35:]]
 test_target = target_arr[index[35:]]
-
+# 원래는 0과 1의 인덱스를 생성하여 1인 인덱스는 training data 0인 인덱스는 test data로 나눠야한다.
+# 하지만 scikit-learn 의 train_test_Split함수를 사용하면 한 번에 나눌 수 있음
 train_input, test_input, train_target, test_target = train_test_split(
     fish_data, fish_target, random_state=42)
+# 처음 2개는 입력 데이터 그 다음은 타깃 데이터가 나온다.
+
+# 처음에 카테고리 별로 있는 데이터들을 정제하면 fish data라는 것이 나온다.
+# 그 후 0과 1의 인덱스로 생성한 fish target 데이터들을 만들어준다.
+
+# 그 후 data와 target 데이터들을 numpy 배열로 만들어준다.
+# numpy.array()로 만들어진 배열은 파이썬의 리스트나 튜플로 만들어진 자료구조와 다른 구조를 갖는다.
+# numpy.ndarray는 numpy.array()함수로 만들 수 있는 자료 형태로 shape, ndim, dtype, itemSize, size등 행렬의 형태를 갖는다.
+print("train_test_split 함수로 만들어진 결과의 ndarry shape")
+print(train_input.shape, test_input.shape)
+# target 데이터들의 데이터 형태
+print(train_target.shape, test_target.shape)
+print(test_target)
+# 하지만 train_test_split 함수에 아무 것도 주지 않으면 target의 비율 대로 섞이지 않는다.
+# 따라서 stratify라는 매개변수를 주어 target의 비율대로 섞어줄 것을 명시한다.
+print(train_target.shape, test_target.shape)
+print("stratify 매개 변수 준 후")
+print(test_target)  # 비율 대로 잘 섞였다.
