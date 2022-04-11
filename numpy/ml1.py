@@ -216,9 +216,9 @@ for n_neighbors, ax in zip([2, 5, 30], axis):
     clf = KNeighborsClassifier(n_neighbors=n_neighbors).fit(
         train_scaled, train_target)
     mglearn.plots.plot_2d_separator(
-        clf, train_scaled, fill=True, eps=0.5, ax=ax, alpha=.4)
+        clf, train_scaled, fill=True, eps=0.5, ax=ax, alpha=.4)  # 바탕색과 관련
     mglearn.discrete_scatter(
-        train_scaled[:, 0], train_scaled[:, 1], train_target, ax=ax)
+        train_scaled[:, 0], train_scaled[:, 1], train_target, ax=ax)  # train data에 대한 산점도
     ax.set_title("{} neighbor(s)".format(n_neighbors))
     ax.set_xlabel("feature0")
     ax.set_ylabel("feature1")
