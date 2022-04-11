@@ -1,4 +1,5 @@
 
+import mglearn
 from random import random
 import numpy as np
 import matplotlib.pyplot as plt
@@ -157,3 +158,69 @@ plt.xlabel('length')
 plt.ylabel('weight')
 plt.show()
 # 다시 그리면 정상적으로 나온다.
+
+
+kn.fit(train_scaled, train_target)
+test_scaled = (test_input - mean) / std  # 정규화를 하는 과정
+kn.score(test_scaled, test_target)  # 다시 한 번 test를 한 결과
+distances, indexes = kn.kneighbors([new])  # 새로운 인풋에 대한 거리와 인덱스를 구해본다.
+
+plt.scatter(train_scaled[:, 0], train_scaled[:, 1])
+plt.scatter(new[0], new[1], marker='^')
+plt.scatter(train_scaled[indexes, 0], train_scaled[indexes, 1], marker='D')
+plt.xlabel('length')
+plt.ylabel('weight')
+plt.show()
+
+#overFitting, underfitting
+kn = KNeighborsClassifier()
+# train_input과 train_label로 supervised learning을 수행한다
+kn.fit(train_input, train_target)
+
+for n in range(5, 50):
+    # 최근접 이웃 개수 설정
+    kn.n_neighbors = n
+    # 점수 계산
+    score = kn.score(test_input, test_target)
+    # 100% 정확도에 미치지 못하는 이웃 개수 출력
+    if score < 1:
+        print("100% 정답 아님 : ")
+        print(n, score)
+        break
+
+kn = KNeighborsClassifier()
+kn.fit(train_scaled, train_target)
+for n in range(2, 37):
+    kn.n_neighbors = n
+    score = kn.score(test_scaled, test_target)
+    if score < 1:
+        print("정규화 한 후 100%아님 :")
+        print(n, score)
+        continue
+
+
+kn = KNeighborsClassifier(n_neighbors=2)  # neighbor의 수를 변경해주었다. #underfitting
+kn.fit(train_scaled, train_target)
+score = kn.score(test_scaled, test_target)
+print(score)
+
+# neighbor의 수를 30으로 변경해주었다. overfitting
+kn = KNeighborsClassifier(n_neighbors=30)
+kn.fit(train_scaled, train_target)
+score = kn.score(test_scaled, test_target)
+print(score)
+
+
+fig, axis = plt.subplots(1, 3, figsize=(10, 3))
+for n_neighbors, ax in zip([2, 5, 30], axis):
+    clf = KNeighborsClassifier(n_neighbors=n_neighbors).fit(
+        train_scaled, train_target)
+    mglearn.plots.plot_2d_separator(
+        clf, train_scaled, fill=True, eps=0.5, ax=ax, alpha=.4)
+    mglearn.discrete_scatter(
+        train_scaled[:, 0], train_scaled[:, 1], train_target, ax=ax)
+    ax.set_title("{} neighbor(s)".format(n_neighbors))
+    ax.set_xlabel("feature0")
+    ax.set_ylabel("feature1")
+axis[0].legend(loc=3)
+plt.show()
