@@ -18,4 +18,10 @@
 
 주석
 
+## 사용 모델
+MLP
+XGBOOST
+DNN
+
+
 
