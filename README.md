@@ -40,7 +40,11 @@ DNN
 minMaxSclaer사용
 
 ## 발표자료
-<img width = "80%" src = "https://github.com/HousePricePredictionIncheon/streamlit/files/8983584/17._TermProject_.ppt_MLP.XGBOOST.pdf)" />
+<object data="http://yoursite.com/the.pdf](https://github.com/HousePricePredictionIncheon/streamlit/files/8983584/17._TermProject_.ppt_MLP.XGBOOST.pdf" type="application/pdf" width="80%">
+    <embed src="http://yoursite.com/the.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://github.com/HousePricePredictionIncheon/streamlit/files/8983584/17._TermProject_.ppt_MLP.XGBOOST.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
 
 
 
