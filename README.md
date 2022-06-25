@@ -39,6 +39,9 @@ DNN
 ## 스케일링
 minMaxSclaer사용
 
+## 발표자료
+<img width = "80%" src = "https://github.com/HousePricePredictionIncheon/streamlit/files/8983584/17._TermProject_.ppt_MLP.XGBOOST.pdf)" />
+
 
 
 
